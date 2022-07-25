@@ -2,9 +2,13 @@
 # https://bionic-reading.com/
 import requests
 import data
+import json
+from functions import *
 
 url = "https://ajith-holy-bible.p.rapidapi.com/GetBooks"
 holyBibleHeaders = data.holyBibleHeaders
-response = requests.request("GET", url, headers=holyBibleHeaders)
+responseObject = requests.request("GET", url, headers=holyBibleHeaders)
+response = responseObject.text
+jsonData = json.loads(response)
 
-print(response.text)
+oldTestament, newTestament = getBooksFromDictionary(jsonData)
